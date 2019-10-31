@@ -38,31 +38,44 @@ class App extends Component {
     // this.setState({ friends: arr })
     for (let i = this.state.friends.length - 1; i > 0; i--){
         // eslint-disable-next-line
-       {let j = Math.floor(Math.random() * (i + 1))}
+       {var j = Math.floor(Math.random() * (i + 1))}
       // const temp = this.state.friends[i]
       // this.state.friends[i] = this.state.friends[j]
       // arr[j] = temp
       // eslint-disable-next-line
-      [(this.state.friends[i], this.state.friends[j])] == [this.state.friends[j], this.state.friends[i]];
+      [this.state.friends[i], this.state.friends[j]] == [this.state.friends[j], this.state.friends[i]];
     }
-    return this.state.friends;
+    return friends;
   }
 
   clickCard = id => {
-    const shuffledArray = this.shuffleCard(friends);
-    this.setState({cards: shuffledArray});
-    if (this.state.selected.includes(id)) {
-      this.setState({ score: 0, selected: []})
-    } else {
-        this.setState({
-          selected: this.state.selected.concat([id]),
-          score: this.state.score + 1
-        });
-    }
+    this.setState({score: this.state.score + 1})
+    // this.setState({selected: this.state.selected.concat([id])});
+    let selected = this.state.selected;
+    selected.push({id})
+    this.setState({selected})
+    // const shuffledArray = this.shuffleCard(friends);
+    // this.setState({friends: this.shuffleCard(friends)});
+    console.log(friends);
+    console.log(selected);
+    // console.log(friends);
     
-    if (this.state.score > this.state.topScore) {
-      this.setState({topScore: this.state.score });
-    }
+    // const shuffledArray = this.shuffleCard(friends);
+    // this.setState({friends: shuffledArray});
+    // if (this.state.selected.includes(id)) {
+    //   this.setState({ score: 0, selected: []})
+    // } else {
+    //     this.setState({
+    //       selected: this.state.selected.concat([id]),
+    //       score: this.state.score + 1
+    //     });
+    // }
+
+    
+    // this code seems to mostly work:
+    // if (this.state.score > this.state.topScore) {
+    //   this.setState({topScore: this.state.score });
+    // }
     // const {selected, friends, correct } = this.state;
 
     // if (selected.length === 0) {
@@ -92,7 +105,7 @@ class App extends Component {
     // const { correct, selected, friends } = this.state;
     return (
       <Wrapper>
-        <Title>Can you Remember? score: {this.state.score} </Title>
+        <Title>Can you Remember? score: {this.state.score} top score: {this.state.topScore} </Title>
         {this.state.friends.map(friend => (
           <FriendCard
             // removeFriend={this.removeFriend}
@@ -101,6 +114,7 @@ class App extends Component {
             name={friend.name}
             image={friend.image}
             score={this.state.score}
+            topScore={this.topScore}
             // occupation={friend.occupation}
             // location={friend.location}
             // isCorrect={correct.includes(i)}
