@@ -49,15 +49,23 @@ class App extends Component {
   }
 
   clickCard = id => {
-    this.setState({score: this.state.score + 1})
+    // this.setState({score: this.state.score + 1})
     // this.setState({selected: this.state.selected.concat([id])});
     let selected = this.state.selected;
     selected.push({id})
+    //console.log(selected)
     this.setState({selected})
+    if (this.state.selected.includes(id)){
+      return this.setState({
+        score: 0, 
+        selected: []})
+    } else {
+     this.setState({score: this.state.score + 1})
+    }
     // const shuffledArray = this.shuffleCard(friends);
     // this.setState({friends: this.shuffleCard(friends)});
     console.log(friends);
-    console.log(selected);
+    console.log(this.state.selected);
     // console.log(friends);
     
     // const shuffledArray = this.shuffleCard(friends);
